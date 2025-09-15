@@ -18,7 +18,7 @@ const QUESTIONS: Q[] = [
   },
   {
     id: "q3",
-    q: "Tokyo là thành phố của?",
+    q: "Tokyo nằm ở quốc gia nào?",
     choices: ["Hàn Quốc", "Nhật Bản", "Trung Quốc", "Thái Lan"],
     correct: 1,
   },
