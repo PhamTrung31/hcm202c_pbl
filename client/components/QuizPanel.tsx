@@ -18,7 +18,7 @@ const QUESTIONS: Q[] = [
   },
   {
     id: "q3",
-    q: "Tokyo là thủ đô của?",
+    q: "Tokyo là thành phố của?",
     choices: ["Hàn Quốc", "Nhật Bản", "Trung Quốc", "Thái Lan"],
     correct: 1,
   },
@@ -29,7 +29,11 @@ export default function QuizPanel() {
   const [answers, setAnswers] = useState<number[]>([]);
   const done = i >= QUESTIONS.length;
   const score = useMemo(
-    () => answers.reduce((acc, a, idx) => (a === QUESTIONS[idx].correct ? acc + 1 : acc), 0),
+    () =>
+      answers.reduce(
+        (acc, a, idx) => (a === QUESTIONS[idx].correct ? acc + 1 : acc),
+        0,
+      ),
     [answers],
   );
 
@@ -43,7 +47,9 @@ export default function QuizPanel() {
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-b from-slate-900 to-black text-white p-6">
       {!done ? (
         <div className="w-full max-w-xl rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-          <div className="text-sm text-white/70">Câu {i + 1} / {QUESTIONS.length}</div>
+          <div className="text-sm text-white/70">
+            Câu {i + 1} / {QUESTIONS.length}
+          </div>
           <h2 className="mt-2 text-2xl font-semibold">{QUESTIONS[i].q}</h2>
           <div className="mt-4 grid gap-3">
             {QUESTIONS[i].choices.map((c, idx) => (
@@ -60,9 +66,19 @@ export default function QuizPanel() {
       ) : (
         <div className="w-full max-w-xl rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur">
           <h2 className="text-2xl font-semibold">Kết quả</h2>
-          <p className="mt-2 text-white/80">Bạn đúng {score}/{QUESTIONS.length} câu.</p>
+          <p className="mt-2 text-white/80">
+            Bạn đúng {score}/{QUESTIONS.length} câu.
+          </p>
           <div className="mt-4">
-            <Button onClick={() => { setI(0); setAnswers([]); }} className="bg-cyan-400 text-slate-900">Làm lại</Button>
+            <Button
+              onClick={() => {
+                setI(0);
+                setAnswers([]);
+              }}
+              className="bg-cyan-400 text-slate-900"
+            >
+              Làm lại
+            </Button>
           </div>
         </div>
       )}

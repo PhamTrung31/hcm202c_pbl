@@ -81,14 +81,18 @@ export function MapView({ points, onSelect, className }: MapViewProps) {
       let L: any = (window as any).L;
       if (typeof L === "undefined") {
         const src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-        let existing = document.querySelector<HTMLScriptElement>(`script[src="${src}"]`);
+        let existing = document.querySelector<HTMLScriptElement>(
+          `script[src="${src}"]`,
+        );
         if (existing) {
           // if script exists but L not yet ready, wait for load
           await new Promise<void>((resolve, reject) => {
             if ((window as any).L) return resolve();
             const onLoad = () => resolve();
             existing!.addEventListener("load", onLoad);
-            existing!.addEventListener("error", () => reject(new Error("Failed to load Leaflet")));
+            existing!.addEventListener("error", () =>
+              reject(new Error("Failed to load Leaflet")),
+            );
             // safety timeout
             setTimeout(() => {
               if ((window as any).L) resolve();
@@ -107,7 +111,9 @@ export function MapView({ points, onSelect, className }: MapViewProps) {
             });
             L = (window as any).L;
           } catch (e) {
-            if (mapRef.current) mapRef.current.innerHTML = "<div class='p-6 text-center text-sm'>Không tải được Leaflet. Vui lòng ki��m tra kết nối.</div>";
+            if (mapRef.current)
+              mapRef.current.innerHTML =
+                "<div class='p-6 text-center text-sm'>Không tải được Leaflet. Vui lòng ki��m tra kết nối.</div>";
             return;
           }
         }
@@ -142,7 +148,8 @@ export function MapView({ points, onSelect, className }: MapViewProps) {
       // Add OpenStreetMap tiles without horizontal wrapping to avoid repeated worlds
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         noWrap: true,
       }).addTo(map);
 
@@ -164,22 +171,25 @@ export function MapView({ points, onSelect, className }: MapViewProps) {
       map.on("resize", fitWorldWidth);
 
       // We will not draw a Vietnam polygon overlay as requested; keep the map tiles clean.
-  // Render every provided point as an interactive marker (including islands).
-  points.forEach((p: MapPoint) => {
-    const isIsland = p.id === "hoangsa" || p.id === "truongsa" || p.id === "phuquoc";
-    const marker = L.circleMarker([p.latitude, p.longitude], {
-      radius: isIsland ? 6 : 8,
-      color: "#06b6d4",
-      weight: 1,
-      fillColor: "#06b6d4",
-      fillOpacity: 1,
-      interactive: true,
-    }).addTo(map);
-    marker.on("click", (e: any) => {
-      e.originalEvent && e.originalEvent.stopPropagation && e.originalEvent.stopPropagation();
-      onSelectRef.current(p);
-    });
-  });
+      // Render every provided point as an interactive marker (including islands).
+      points.forEach((p: MapPoint) => {
+        const isIsland =
+          p.id === "hoangsa" || p.id === "truongsa" || p.id === "phuquoc";
+        const marker = L.circleMarker([p.latitude, p.longitude], {
+          radius: isIsland ? 6 : 8,
+          color: "#06b6d4",
+          weight: 1,
+          fillColor: "#06b6d4",
+          fillOpacity: 1,
+          interactive: true,
+        }).addTo(map);
+        marker.on("click", (e: any) => {
+          e.originalEvent &&
+            e.originalEvent.stopPropagation &&
+            e.originalEvent.stopPropagation();
+          onSelectRef.current(p);
+        });
+      });
 
       // Save reference for cleanup
       leafletRef.current = map;
@@ -206,7 +216,10 @@ export function MapView({ points, onSelect, className }: MapViewProps) {
   }, [points]);
 
   return (
-    <div className={cn("fixed inset-0 w-full h-full z-0", className)} aria-label="Bản đồ thế giới">
+    <div
+      className={cn("fixed inset-0 w-full h-full z-0", className)}
+      aria-label="Bản đồ thế giới"
+    >
       <div ref={mapRef} className="absolute inset-0 h-full w-full" />
       <div className="absolute left-4 bottom-6 z-[1000] rounded-full bg-white/90 px-4 py-2 text-sm text-slate-900 shadow">
         Nhấn vào vùng tô để mở nội dung; bản đồ tĩnh (không zoom/pan)
