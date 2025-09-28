@@ -3,6 +3,8 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { saveQuizResult, getQuizResults } from "./routes/quiz";
+import { getHistorySummary } from "./routes/history";
+import { getChatbotResponse } from "./routes/chatbot";
 import { mongoService } from "./database/mongodb";
 
 export function createServer() {
@@ -27,6 +29,12 @@ export function createServer() {
   // Quiz routes
   app.post("/api/quiz/save-result", saveQuizResult);
   app.get("/api/quiz/results", getQuizResults);
+
+  // History routes
+  app.get("/api/history/summary", getHistorySummary);
+
+  // Chatbot routes
+  app.post("/api/chatbot/message", getChatbotResponse);
 
   return app;
 }

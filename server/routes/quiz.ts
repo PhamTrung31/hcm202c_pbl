@@ -65,17 +65,21 @@ export const saveQuizResult: RequestHandler = async (req, res) => {
 
 export const getQuizResults: RequestHandler = async (req, res) => {
   try {
-    // Đảm bảo database đã kết nối
     if (!mongoService.isConnected) {
       await mongoService.connect();
     }
 
     const collection = getQuizResultsCollection();
     
-    // Lấy 10 kết quả gần nhất, sắp xếp theo thời gian hoàn thành
+    // Lấy 10 kết quả cao nhất, sắp xếp theo:
+    // 1. Số câu trả lời đúng (score) - giảm dần
+    // 2. Thời gian hoàn thành (duration) - tăng dần (nhanh nhất lên đầu)
     const results = await collection
       .find({})
-      .sort({ completedAt: -1 })
+      .sort({ 
+        score: -1,      
+        duration: 1     
+      })
       .limit(10)
       .toArray();
 
