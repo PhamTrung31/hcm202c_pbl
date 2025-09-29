@@ -1,51 +1,33 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SaveQuizResultRequest, SaveQuizResultResponse } from "@shared/api";
+import { SaveQuizResultRequest, SaveQuizResultResponse, QuizQuestion, GetQuizQuestionsResponse, PlayerRank } from "@shared/api";
 import Leaderboard from "./Leaderboard";
 
-type Q = { id: string; q: string; choices: string[]; correct: number };
-
-const QUESTIONS: Q[] = [
-  {
-    id: "q1",
-    q: "Thủ đô của Việt Nam là?",
-    choices: ["TP.HCM", "Hà Nội", "Đà Nẵng", "Huế"],
-    correct: 1,
-  },
-  {
-    id: "q2",
-    q: "Paris thuộc quốc gia nào?",
-    choices: ["Tây Ban Nha", "Italy", "Pháp", "Đức"],
-    correct: 2,
-  },
-  {
-    id: "q3",
-    q: "Tokyo nằm ở quốc gia nào?",
-    choices: ["Hàn Quốc", "Nhật Bản", "Trung Quốc", "Thái Lan"],
-    correct: 1,
-  },
-];
-
 export default function QuizPanel() {
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
+  const [loadError, setLoadError] = useState("");
   const [i, setI] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
+  const [answers, setAnswers] = useState<string[]>([]); // Changed to string[] for option IDs
   const [playerName, setPlayerName] = useState("");
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [endTime, setEndTime] = useState<Date | null>(null);
   const [isStarted, setIsStarted] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
+  const [playerRank, setPlayerRank] = useState<PlayerRank | null>(null);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const quizCount = 12; // Fixed to 12 questions
   
-  const done = i >= QUESTIONS.length;
+  const done = i >= questions.length;
   const score = useMemo(
     () =>
       answers.reduce(
-        (acc, a, idx) => (a === QUESTIONS[idx].correct ? acc + 1 : acc),
+        (acc, answer, idx) => (answer === questions[idx]?.correctAnswer ? acc + 1 : acc),
         0,
       ),
-    [answers],
+    [answers, questions],
   );
 
   const duration = useMemo(() => {
@@ -61,21 +43,46 @@ export default function QuizPanel() {
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const startQuiz = () => {
+  // Load random quiz questions from API
+  const loadQuestions = async (count: number) => {
+    setIsLoadingQuestions(true);
+    setLoadError("");
+    
+    try {
+      const response = await fetch(`/api/quiz/questions?count=${count}&random=true`);
+      const result: GetQuizQuestionsResponse = await response.json();
+      
+      if (result.success && result.data) {
+        setQuestions(result.data);
+      } else {
+        setLoadError(result.message || "Không thể tải câu hỏi");
+      }
+    } catch (error) {
+      console.error('Lỗi khi tải câu hỏi:', error);
+      setLoadError("Có lỗi xảy ra khi tải câu hỏi");
+    } finally {
+      setIsLoadingQuestions(false);
+    }
+  };
+
+  const startQuiz = async () => {
     if (!playerName.trim()) {
       alert("Vui lòng nhập tên của bạn!");
       return;
     }
+    
+    // Load questions first
+    await loadQuestions(quizCount);
     setIsStarted(true);
     setStartTime(new Date());
   };
 
-  const choose = (idx: number) => {
+  const choose = (optionId: string) => {
     if (done) return;
-    setAnswers((a) => [...a, idx]);
+    setAnswers((a) => [...a, optionId]);
     
     // Nếu là câu cuối, set thời gian kết thúc
-    if (i === QUESTIONS.length - 1) {
+    if (i === questions.length - 1) {
       setEndTime(new Date());
     }
     
@@ -92,7 +99,7 @@ export default function QuizPanel() {
       const requestData: SaveQuizResultRequest = {
         name: playerName.trim(),
         score,
-        totalQuestions: QUESTIONS.length,
+        totalQuestions: questions.length,
         duration
       };
 
@@ -108,6 +115,9 @@ export default function QuizPanel() {
       
       if (result.success) {
         setSaveMessage("✅ Kết quả đã được lưu thành công!");
+        if (result.rank) {
+          setPlayerRank(result.rank);
+        }
       } else {
         setSaveMessage("❌ " + result.message);
       }
@@ -129,24 +139,28 @@ export default function QuizPanel() {
     setIsSaving(false);
     setSaveMessage("");
     setShowLeaderboard(false);
+    setQuestions([]);
+    setLoadError("");
+    setPlayerRank(null);
   };
 
   // Auto save khi hoàn thành quiz
   useEffect(() => {
-    if (done && endTime && playerName && !saveMessage) {
+    if (done && endTime && playerName && !saveMessage && questions.length > 0) {
       saveResult();
     }
-  }, [done, endTime, playerName]);
+  }, [done, endTime, playerName, questions.length]);
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-b from-slate-900 to-black text-white p-6">
       {!isStarted ? (
         // Màn hình nhập tên
         <div className="w-full max-w-xl rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-          <h2 className="text-2xl font-semibold text-center">Chào mừng đến với Quiz!</h2>
+          <h2 className="text-2xl font-semibold text-center">Quiz Tư tưởng Hồ Chí Minh</h2>
           <p className="mt-2 text-white/80 text-center">
-            Hãy nhập tên của bạn để bắt đầu làm quiz
+            Hãy nhập tên của bạn để bắt đầu làm quiz (12 câu hỏi)
           </p>
+          
           <div className="mt-4">
             <Input
               value={playerName}
@@ -156,13 +170,20 @@ export default function QuizPanel() {
               onKeyPress={(e) => e.key === 'Enter' && startQuiz()}
             />
           </div>
+          
+          {loadError && (
+            <div className="mt-4 text-red-400 text-center text-sm">
+              {loadError}
+            </div>
+          )}
+          
           <div className="mt-4 text-center">
             <Button
               onClick={startQuiz}
-              disabled={!playerName.trim()}
+              disabled={!playerName.trim() || isLoadingQuestions}
               className="bg-cyan-400 text-slate-900 hover:bg-cyan-500"
             >
-              Bắt đầu Quiz
+              {isLoadingQuestions ? "Đang tải câu hỏi..." : "Bắt đầu Quiz"}
             </Button>
             <Button
               onClick={() => setShowLeaderboard(true)}
@@ -172,33 +193,72 @@ export default function QuizPanel() {
             </Button>
           </div>
         </div>
-      ) : !done ? (
+      ) : !done && questions.length > 0 ? (
         // Màn hình câu hỏi
-        <div className="w-full max-w-xl rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+        <div className="w-full max-w-2xl rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur">
           <div className="flex justify-between items-center text-sm text-white/70">
-            <span>Câu {i + 1} / {QUESTIONS.length}</span>
+            <span>Câu {i + 1} / {questions.length}</span>
             <span>Người chơi: {playerName}</span>
           </div>
-          <h2 className="mt-2 text-2xl font-semibold">{QUESTIONS[i].q}</h2>
-          <div className="mt-4 grid gap-3">
-            {QUESTIONS[i].choices.map((c, idx) => (
+          <div className="mt-2 mb-4">
+            <div className="w-full bg-white/10 rounded-full h-2">
+              <div 
+                className="bg-cyan-400 h-2 rounded-full transition-all duration-300" 
+                style={{ width: `${((i + 1) / questions.length) * 100}%` }}
+              />
+            </div>
+          </div>
+          <h2 className="mt-2 text-xl font-semibold leading-relaxed">{questions[i].question}</h2>
+          <div className="mt-6 grid gap-3">
+            {questions[i].options.map((option) => (
               <button
-                key={idx}
-                onClick={() => choose(idx)}
-                className="w-full rounded-xl bg-white/10 px-4 py-3 text-left hover:bg-white/15 transition-colors"
+                key={option.id}
+                onClick={() => choose(option.id)}
+                className="w-full rounded-xl bg-white/10 px-4 py-4 text-left hover:bg-white/15 transition-colors border border-white/5 hover:border-white/10"
               >
-                {c}
+                <span className="font-medium text-cyan-300">{option.id}.</span> {option.text}
               </button>
             ))}
           </div>
         </div>
-      ) : (
+      ) : done && questions.length > 0 ? (
         // Màn hình kết quả
         <div className="w-full max-w-xl rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur">
-          <h2 className="text-2xl font-semibold">Kết quả của {playerName}</h2>
-          <div className="mt-4 space-y-2 text-white/80">
-            <p>Điểm số: {score}/{QUESTIONS.length} câu đúng</p>
-            <p>Thời gian: {formatDuration(duration)}</p>
+          <h2 className="text-2xl font-semibold">🎉 Kết quả của {playerName}</h2>
+          <div className="mt-6 space-y-4">
+            <div className="text-4xl font-bold text-cyan-400">
+              {score}/{questions.length}
+            </div>
+            <div className="text-white/80 space-y-2">
+              <p>📊 Tỷ lệ đúng: {((score / questions.length) * 100).toFixed(1)}%</p>
+              <p>⏱️ Thời gian: {formatDuration(duration)}</p>
+              <p>🎯 Trung bình: {duration > 0 ? (duration / questions.length).toFixed(1) + "s/câu" : "N/A"}</p>
+              
+              {/* Hiển thị hạng nếu có */}
+              {playerRank && (
+                <div className="mt-4 p-3 bg-white/10 rounded-lg border border-white/20">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-cyan-300 font-medium">🏆 Hạng của bạn</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                      playerRank.rankCategory === 'Xuất sắc' ? 'bg-yellow-500 text-yellow-900' :
+                      playerRank.rankCategory === 'Giỏi' ? 'bg-green-500 text-green-900' :
+                      playerRank.rankCategory === 'Khá' ? 'bg-blue-500 text-blue-900' :
+                      playerRank.rankCategory === 'Trung bình' ? 'bg-orange-500 text-orange-900' :
+                      'bg-red-500 text-red-900'
+                    }`}>
+                      {playerRank.rankCategory}
+                    </span>
+                  </div>
+                  <div className="text-sm space-y-1">
+                    <p>📍 Hạng #{playerRank.currentRank} / {playerRank.totalPlayers} người chơi</p>
+                    <p>📈 Top {100 - playerRank.percentile}% ({playerRank.percentile}% điểm)</p>
+                    {playerRank.isPersonalBest && (
+                      <p className="text-yellow-400">⭐ Kỷ lục cá nhân mới!</p>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
             {saveMessage && (
               <p className="text-sm font-medium">{saveMessage}</p>
             )}
@@ -226,6 +286,12 @@ export default function QuizPanel() {
               🏆 Bảng xếp hạng
             </Button>
           </div>
+        </div>
+      ) : (
+        // Loading state
+        <div className="w-full max-w-xl rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur">
+          <div className="animate-spin w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full mx-auto"></div>
+          <p className="mt-4 text-white/80">Đang tải câu hỏi...</p>
         </div>
       )}
       

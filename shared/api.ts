@@ -34,6 +34,31 @@ export interface SaveQuizResultResponse {
   success: boolean;
   message: string;
   result?: QuizResult;
+  rank?: PlayerRank;
+}
+
+/**
+ * Player ranking types
+ */
+export interface PlayerRank {
+  currentRank: number;
+  totalPlayers: number;
+  percentile: number;
+  rankCategory: 'Xuất sắc' | 'Giỏi' | 'Khá' | 'Trung bình' | 'Yếu';
+  isPersonalBest: boolean;
+}
+
+export interface GetPlayerRankRequest {
+  name: string;
+  score: number;
+  totalQuestions: number;
+  duration: number;
+}
+
+export interface GetPlayerRankResponse {
+  success: boolean;
+  data?: PlayerRank;
+  message?: string;
 }
 
 /**
@@ -83,6 +108,45 @@ export interface HistorySummaryData {
 export interface HistorySummaryResponse {
   success: boolean;
   data?: HistorySummaryData;
+  message?: string;
+}
+
+/**
+ * Quiz question types
+ */
+export interface QuizOption {
+  id: string;
+  text: string;
+}
+
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  options: QuizOption[];
+  correctAnswer: string; // id của option đúng
+  type: 'single-choice' | 'multiple-choice';
+  category: string;
+  difficulty?: 'easy' | 'medium' | 'hard';
+}
+
+export interface QuizData {
+  title: string;
+  description: string;
+  category: string;
+  questions: QuizQuestion[];
+  totalQuestions: number;
+}
+
+export interface GetQuizQuestionsRequest {
+  count?: number; // số câu hỏi muốn lấy
+  category?: string; // lọc theo danh mục
+  difficulty?: string; // lọc theo độ khó
+  random?: boolean; // có random không
+}
+
+export interface GetQuizQuestionsResponse {
+  success: boolean;
+  data?: QuizQuestion[];
   message?: string;
 }
 

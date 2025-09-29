@@ -100,7 +100,7 @@ export default function ChatbotPanel() {
           </Button>
         </div>
         <p className="mt-2 text-center text-xs text-white/40">
-          Được hỗ trợ bởi AI - Thông tin dựa trên tài liệu lịch sử
+          Được hỗ trợ bởi Fall25 - Half1 - SE1738 - HCM202 - Nhóm 7. Thông tin dựa trên tài liệu lịch sử
         </p>
       </div>
     </div>

@@ -2,7 +2,8 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
-import { saveQuizResult, getQuizResults } from "./routes/quiz";
+import { saveQuizResult, getQuizResults, getPlayerRank } from "./routes/quiz";
+import { getQuizQuestions, getQuizStats } from "./routes/quiz-questions";
 import { getHistorySummary } from "./routes/history";
 import { getChatbotResponse } from "./routes/chatbot";
 import { mongoService } from "./database/mongodb";
@@ -27,7 +28,10 @@ export function createServer() {
   app.get("/api/demo", handleDemo);
   
   // Quiz routes
+  app.get("/api/quiz/questions", getQuizQuestions);
+  app.get("/api/quiz/stats", getQuizStats);
   app.post("/api/quiz/save-result", saveQuizResult);
+  app.post("/api/quiz/rank", getPlayerRank);
   app.get("/api/quiz/results", getQuizResults);
 
   // History routes

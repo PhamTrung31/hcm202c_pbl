@@ -1,0 +1,1284 @@
+{
+  "title": "Bài Quiz Tư tưởng Hồ Chí Minh",
+  "description": "Tổng hợp câu hỏi về tư tưởng Hồ Chí Minh HCM201",
+  "category": "HCM201",
+  "questions": [
+    {
+      "id": "hcm201_q1",
+      "question": "“Luận cương của V. I. Lênin làm cho tôi rất cảm động, phấn khởi, sáng tỏ, tin tưởng biết bao. Tôi vui mừng đến phát khóc lên. Ngồi một mình trong buồng mà tôi nói to lên như đang nói trước quần chúng đông đảo: hỡi đồng bào bị đọa đày đau khổ. Đây là cái cần thiết cho chúng ta, đây là con đường giải phóng của chúng ta\". Nguyễn Ái Quốc nói câu ấy khi đang ở đâu?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Luân Đôn, Anh"
+        },
+        {
+          "id": "B",
+          "text": "Paris, Pháp"
+        },
+        {
+          "id": "C",
+          "text": "Quảng Châu, Trung Quốc"
+        },
+        {
+          "id": "D",
+          "text": "Máxcova, Liên Xô"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q2",
+      "question": "Theo Nguyễn Ái Quốc, cách mạng giải phóng dân tộc trong thời đại mới muốn giành được thắng lợi phải đi theo?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Con đường cách mạng vô sản"
+        },
+        {
+          "id": "B",
+          "text": "Con đường giành độc lập của người Mỹ"
+        },
+        {
+          "id": "C",
+          "text": "Con đường giành độc lập của nhân dân Ấn Độ"
+        },
+        {
+          "id": "D",
+          "text": "Con đường cứu nước mà những bậc tiền bối đã đi"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q3",
+      "question": "Thay mặt Hội những người Việt Nam yêu nước tại Pháp, Nguyễn Ái Quốc gửi đến Hội nghị Vécxay Bản yêu sách của nhân dân Việt Nam gồm mấy điểm?",
+      "options": [
+        {
+          "id": "A",
+          "text": "8 điểm"
+        },
+        {
+          "id": "B",
+          "text": "12 điểm"
+        },
+        {
+          "id": "C",
+          "text": "9 điểm"
+        },
+        {
+          "id": "D",
+          "text": "6 điểm"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q4",
+      "question": "Nguyên Ái Quốc đã thành lập Hội Việt Nam cách mạng thanh niên vào thời gian nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "6-1927"
+        },
+        {
+          "id": "B",
+          "text": "6-1929"
+        },
+        {
+          "id": "C",
+          "text": "6-1924"
+        },
+        {
+          "id": "D",
+          "text": "6-1925"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q5",
+      "question": "\"Tất cá các dân tộc trên thế giới đều sinh ra bình đẳng, dân tộc nào cũng có quyền sống, quyền sung sưởng và quyền tự do\". Câu trên trích từ tác phẩm nào của Hồ Chí Minh?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chính cương sách lược vắn tóm tắt"
+        },
+        {
+          "id": "B",
+          "text": "Đường cách mệnh"
+        },
+        {
+          "id": "C",
+          "text": "Bản án chế độ thực dân Pháp"
+        },
+        {
+          "id": "D",
+          "text": "Tuyên ngôn độc lập"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q6",
+      "question": "\"Trước hết phải có Đảng cách mệnh để trong thì vận động và tổ chức dân chúng, ngoài thi liên lạc với dân tộc bị áp bức và vô sán giai cấp mọi nơi.\" Câu nói đó được Nguyễn Ái Quốc viết trong tác phẩm nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sửa đổi lối làm việc"
+        },
+        {
+          "id": "B",
+          "text": "Đây “công lý\" của thực dân Pháp ở Đông Dương"
+        },
+        {
+          "id": "C",
+          "text": "Đường cách mệnh"
+        },
+        {
+          "id": "D",
+          "text": "V.I.Lênin và Phương Đông"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q7",
+      "question": "Nguyên Ái Quốc đến Liên Xô lần đầu năm nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1922"
+        },
+        {
+          "id": "B",
+          "text": "1923"
+        },
+        {
+          "id": "C",
+          "text": "1924"
+        },
+        {
+          "id": "D",
+          "text": "1921"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q8",
+      "question": "Nguyễn Tất Thành dạy học ở trường Dục Thanh thời gian nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "9/1910 đến 5/1912"
+        },
+        {
+          "id": "B",
+          "text": "9/1910 đến 2/1911"
+        },
+        {
+          "id": "C",
+          "text": "9/1910 đến 4/1912"
+        },
+        {
+          "id": "D",
+          "text": "9/1908 đến 9/1909"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q9",
+      "question": "Cách mạng giải phóng dân tộc là sự nghiệp đoàn kết của?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Giai cấp công nhân với giai cấp nông dân"
+        },
+        {
+          "id": "B",
+          "text": "Của toàn dân trên cơ sở liên minh của giai cấp công nhãn với giai cấp nông dân và trí thức"
+        },
+        {
+          "id": "C",
+          "text": "Giai cấp công nhân với tầng lớp trí thức"
+        },
+        {
+          "id": "D",
+          "text": "Giai cấp công nhân với các nhà công thương giàu có"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q10",
+      "question": "Biện pháp hàng đầu để giành thắng lợi trong cách mạng giải phóng dân tộc phải dựa vào ai?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dùng phương pháp đàm phán hòa bình"
+        },
+        {
+          "id": "B",
+          "text": "Dùng phương pháp đảm phán kết hợp chiến tranh"
+        },
+        {
+          "id": "C",
+          "text": "Dựa vào bạo lực vũ trang thuần túy"
+        },
+        {
+          "id": "D",
+          "text": "Sử dụng bạo lực cách mạng, kết hợp bạo lực chính trị của quần chúng với bạo lực vũ trang"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q11",
+      "question": "Nguyễn Tất Thành lấy tên là Nguyên Ái Quốc vào thời gian nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Khi Bác sang Liên Xô làm việc ở Ban Phương Đông của Quốc tế Cộng sản tháng 6/1923"
+        },
+        {
+          "id": "B",
+          "text": "Khi Bác lên tàu từ bến Nhà Rồng năm 1911"
+        },
+        {
+          "id": "C",
+          "text": "Tại Hội nghị Vécxay (Pháp) ngày 18/6/1919"
+        },
+        {
+          "id": "D",
+          "text": "Khi Bác tham gia sáng lập Đảng Cộng sản Pháp tại Đại hội Tua tháng 12/1920"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q12",
+      "question": "\"Luận cương của Lênin theo Người vê quê Việt Đất nước còn xa nhưng hạnh phúc đã gần rồi\" Ai là tác giả của những câu thơ trên?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chế Lan Viên"
+        },
+        {
+          "id": "B",
+          "text": "Huy Cận"
+        },
+        {
+          "id": "C",
+          "text": "Sóng Hồng"
+        },
+        {
+          "id": "D",
+          "text": "Tố Hữu"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q13",
+      "question": "Nguyễn Ái Quốc là người Việt Nam thứ mấy tham gia vào Đảng Cộng sản Pháp trong thời gian từ tháng 12/1920 đến tháng 6/1923?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Thứ tư"
+        },
+        {
+          "id": "B",
+          "text": "Thứ ba"
+        },
+        {
+          "id": "C",
+          "text": "Thứ nhất"
+        },
+        {
+          "id": "D",
+          "text": "Thứ hai"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q14",
+      "question": "Theo Hồ Chí Minh, ai là người đầu tiên đã đặt cơ sở cho một thời đại mới, thật sự cách mạng trong các nước thuộc địa?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Hô-xê-mác-ti"
+        },
+        {
+          "id": "B",
+          "text": "Lênin"
+        },
+        {
+          "id": "C",
+          "text": "Mao Trạch Đông"
+        },
+        {
+          "id": "C",
+          "text": "Mác"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q15",
+      "question": "Đối tượng của bộ môn Tư tưởng Hồ Chí Minh?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Quá trình sản sinh tư tưởng"
+        },
+        {
+          "id": "B",
+          "text": "Quá trình sản sinh và hiện thực hóa tư tưởng"
+        },
+        {
+          "id": "C",
+          "text": "Quá trình hiện thực hóa tư tưởng"
+        },
+        {
+          "id": "D",
+          "text": "Quá trình Đảng cộng sản vận dụng tư tưởng Hồ Chí Minh"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q16",
+      "question": "Hồ Chí Minh đã cải tổ Tâm Tâm xã thành Hội Việt Nam cách mạng thanh niên vào năm nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1924"
+        },
+        {
+          "id": "B",
+          "text": "1923"
+        },
+        {
+          "id": "C",
+          "text": "1927"
+        },
+        {
+          "id": "D",
+          "text": "1925"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q17",
+      "question": "Có mấy nguyên tắc phương pháp luận khi nghiên cứu tư tưởng Hồ Chí Minh?",
+      "options": [
+        {
+          "id": "A",
+          "text": "7 nguyên tắc"
+        },
+        {
+          "id": "B",
+          "text": "5 nguyên tắc"
+        },
+        {
+          "id": "C",
+          "text": "6 nguyên tắc"
+        },
+        {
+          "id": "D",
+          "text": "4 nguyên tắc"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q18",
+      "question": "Nguyễn Ái Quốc tham dự Đại hội lần thứ nhất của Đảng Cộng sản Pháp vào năm nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1919"
+        },
+        {
+          "id": "B",
+          "text": "1920"
+        },
+        {
+          "id": "C",
+          "text": "1921"
+        },
+        {
+          "id": "D",
+          "text": "1922"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q19",
+      "question": "Nguyễn Ái Quốc sang Mỹ nhằm mục địch gi?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Để nghiên cứu tuyên ngôn độc lập của nước Mỹ"
+        },
+        {
+          "id": "B",
+          "text": "Để học nghề"
+        },
+        {
+          "id": "C",
+          "text": "Để nghiên cứu cách mạng dãn chủ tư sản Mỹ"
+        },
+        {
+          "id": "D",
+          "text": "Để tham quan"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q20",
+      "question": "Bản chất của chủ nghĩa tư bản “là một con đỉa có 1 cái vòi bám vào giai cấp vô sán ở chính quốc và 1 cái vòi khác bám vào giai cấp vô sán ở thuộc địa. Nếu muốn giết con vật ấy, người ta phải đồng thời cắt cả hai vòi. Nếu người ta chí cắt một vòi thôi thì cái vòi còn lại kia vẫn tiếp tục hút máu của giai cấp vô sán, con vật vẫn tiếp tục sống và cái vòi bị cắt đứt lại sẽ mọc ra” câu nói đó trích từ tác phẩm nào của Nguyễn Ái Quốc?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bản án chế độ thực dân Pháp"
+        },
+        {
+          "id": "B",
+          "text": "Con rồng tre"
+        },
+        {
+          "id": "C",
+          "text": "V.I. Lênin và các dân tộc phương Đông"
+        },
+        {
+          "id": "D",
+          "text": "Đường cách mệnh"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q21",
+      "question": "Nguyễn Ái Quốc gửi bản yêu sách của nhân dân An Nam tới hội nghị Véc-xãy vào năm nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Năm 1919"
+        },
+        {
+          "id": "B",
+          "text": "Năm 1921"
+        },
+        {
+          "id": "C",
+          "text": "Năm 1918"
+        },
+        {
+          "id": "D",
+          "text": "Năm 1920"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q22",
+      "question": "Ngày tháng năm nào, Nguyễn Tất Thành ra nước ngoài tìm đường cứu nước?",
+      "options": [
+        {
+          "id": "A",
+          "text": "15-6-1911"
+        },
+        {
+          "id": "B",
+          "text": "6-5-1911"
+        },
+        {
+          "id": "C",
+          "text": "25-6-1911"
+        },
+        {
+          "id": "D",
+          "text": "5-6-1911"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q23",
+      "question": "Bộ môn Tư tưởng Hồ Chí Minh có mấy nhiệm vụ khi nghiên cứu Tư tưởng Hồ Chí Minh?",
+      "options": [
+        {
+          "id": "A",
+          "text": "7 nhiệm vụ"
+        },
+        {
+          "id": "B",
+          "text": "5 nhiệm vụ"
+        },
+        {
+          "id": "C",
+          "text": "6 nhiệm vụ"
+        },
+        {
+          "id": "D",
+          "text": "4 nhiệm vụ"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q24",
+      "question": "Cách mạng giải phóng dân tộc muốn giành được thắng lợi, cần phải?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dựa vào các nước có nền kinh tế phát triển cao"
+        },
+        {
+          "id": "B",
+          "text": "Dựa vào thắng lợi của cách mạng ở các nước thuộc địa khác"
+        },
+        {
+          "id": "C",
+          "text": "Dựa vào thắng lợi của cách mạng ở \"chính quốc\""
+        },
+        {
+          "id": "D",
+          "text": "Được tiến hành một cách chủ động và sáng tạo"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q25",
+      "question": "\"Cách mạng là phá cái cũ đối ra cải mới, cái xấu đổi ra cái tốt\". Câu trên được trích từ tác phẩm nào của Hồ Chí Minh?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bản án chế độ thực dân Pháp"
+        },
+        {
+          "id": "B",
+          "text": "Đường Cách mệnh"
+        },
+        {
+          "id": "C",
+          "text": "Sửa đổi lề lối làm việc"
+        },
+        {
+          "id": "D",
+          "text": "Đạo đức cách mạng"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q26",
+      "question": "Nội dung cốt lõi của tư tưởng Hồ Chí Minh là?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chủ nghĩa xã hội"
+        },
+        {
+          "id": "B",
+          "text": "Chủ nghĩa yêu nước"
+        },
+        {
+          "id": "C",
+          "text": "Chủ nghĩa nhân đạo chiến đấu"
+        },
+        {
+          "id": "D",
+          "text": "Độc lập dân tộc gần liền với chú nghĩa xã hội"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q27",
+      "question": "Tác phẩm “Bản án chế độ thực dân Pháp\" của Bác Hồ được viết năm nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Năm 1928"
+        },
+        {
+          "id": "B",
+          "text": "Năm 1927"
+        },
+        {
+          "id": "C",
+          "text": "Năm 1929"
+        },
+        {
+          "id": "D",
+          "text": "Năm 1925"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q28",
+      "question": "Mốc thời gian nào ghi dấu Nguyên Ái Quốc trở về Tố quốc sau ba mươi năm hoạt động ở nước ngoài?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngày 28 - 1 - 1940"
+        },
+        {
+          "id": "B",
+          "text": "Ngày 28 - 1 - 1943"
+        },
+        {
+          "id": "C",
+          "text": "Ngày 28 - 1 - 1941"
+        },
+        {
+          "id": "D",
+          "text": "Ngày 28 - 1 - 1942"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q29",
+      "question": "Nguyễn Ái Quốc đã tiếp xúc với nhóm “Tâm tâm xã\" ở đâu?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đông Bắc, Thái Lan"
+        },
+        {
+          "id": "B",
+          "text": "Hồng Công, Trung Quốc"
+        },
+        {
+          "id": "C",
+          "text": "Quảng Châu, Trung Quốc"
+        },
+        {
+          "id": "D",
+          "text": "Thượng Hải, Trung Quốc"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q30",
+      "question": "Thời kỳ hình thành tư tưởng cơ bản về cách mạng Việt Nam được tính từ:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Năm 1945 đến năm 1954"
+        },
+        {
+          "id": "B",
+          "text": "Năm 1954 đến năm 1969"
+        },
+        {
+          "id": "C",
+          "text": "Năm 1921 đến năm 1930"
+        },
+        {
+          "id": "D",
+          "text": "Năm 1931 đến năm 1945"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q31",
+      "question": "Hồ Chí Minh xác định huy hiệu của thanh niên là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tay cầm cờ đỏ sao vàng tiến lên"
+        },
+        {
+          "id": "B",
+          "text": "Tây cầm súng tiến lên"
+        },
+        {
+          "id": "C",
+          "text": "Tay cầm khẩu hiệu tiến lên"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q32",
+      "question": "Một trong những giá trị của văn hóa phương Tây được Hồ Chí Minh tiếp thu để hình thành tư tường của mình là gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tư tường văn hoa dân chủ và cách mạng của cách mạng Pháp và cách mạng Mỹ"
+        },
+        {
+          "id": "B",
+          "text": "Những mặt tích cực của Nho Giáo"
+        },
+        {
+          "id": "C",
+          "text": "Triết học cổ điển Đức"
+        },
+        {
+          "id": "D",
+          "text": "Kinh tế chính trị cổ điển Anh"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q33",
+      "question": "Nguyễn Ái Quốc đọc luận cương của Lênin vào thời gian nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "7/1917"
+        },
+        {
+          "id": "B",
+          "text": "7/1918"
+        },
+        {
+          "id": "C",
+          "text": "7/1919"
+        },
+        {
+          "id": "D",
+          "text": "7/1920"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q34",
+      "question": "Hồ Chí Minh lưu ý:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đảng cầm quyền, Đảng lãnh đạo để cho dân làm chủ"
+        },
+        {
+          "id": "B",
+          "text": "Đảng cầm quyền, Đảng lãnh đạo để cho dân quản lý"
+        },
+        {
+          "id": "C",
+          "text": "Đảng cầm quyền, Đảng lãnh đạo để cho dân giám sát"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q35",
+      "question": "Theo Hồ Chí Minh, nhà nước vì dân là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhà nước phải phụng sự nhân dân"
+        },
+        {
+          "id": "B",
+          "text": "Nhà nước phải phụng sự giai cấp cầm quyền"
+        },
+        {
+          "id": "C",
+          "text": "Nhà nước phải phụng sự Đảng Cộng sản"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q36",
+      "question": "Theo Hồ Chí Minh, quyền lãnh đạo Mặt trận của Đảng không phải do Đảng tự phong cho mình, mà phải được thực hiện như thế nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nhân dân bỏ phiếu"
+        },
+        {
+          "id": "B",
+          "text": "Trưng cầu dân ý"
+        },
+        {
+          "id": "C",
+          "text": "Nhân dân thừa nhận"
+        },
+        {
+          "id": "D",
+          "text": "Chính quyền cho phép"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q37",
+      "question": "Đâu là quan điểm của Hồ Chí Minh trong các quan điểm sau?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Trong giai đoạn thuộc địa, giải phóng chính trị - xã hội là trước hết, mở đường để giải phóng văn hoa"
+        },
+        {
+          "id": "B",
+          "text": "Trong giai đoạn thuộc địa, giải phóng chính trị - xã hội là trước hết, mở đường để giải phóng nhân loại"
+        },
+        {
+          "id": "C",
+          "text": "Trong giai đoạn thuộc địa, giải phóng chính trị - xã hội là trước hết, mở đường để giải phóng dân tộc"
+        },
+        {
+          "id": "D",
+          "text": "Trong giai đoạn thuộc địa, giải phóng chính trị - xã hội là trước hết, mở đường để giải phóng các dân tộc anh em"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q38",
+      "question": "Quan điểm nào sau đây được xem là đánh giá của Hồ Chí Minh về giá trị của dân chủ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dân chủ là của quý báu nhất của nhân dân"
+        },
+        {
+          "id": "B",
+          "text": "Dân chủ là tài sản quý báu nhất của dân quyền"
+        },
+        {
+          "id": "C",
+          "text": "Dân chủ là tài sản của mọi chế độ xã hội"
+        },
+        {
+          "id": "D",
+          "text": "Dân chủ là tài sản vô giá của mọi xã hội không có sự phân chia giai cấp"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q39",
+      "question": "Mặt trận Liên Việt được thành lập vào thời gian nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1941"
+        },
+        {
+          "id": "B",
+          "text": "1945"
+        },
+        {
+          "id": "C",
+          "text": "1951"
+        },
+        {
+          "id": "D",
+          "text": "1960"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q40",
+      "question": "Theo Hồ Chí Minh, cách mạng XHCN phải tiến hành đồng thời với:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cách mạng tư sản"
+        },
+        {
+          "id": "B",
+          "text": "Cách mạng dân tộc dân chủ nhân dân"
+        },
+        {
+          "id": "C",
+          "text": "Cách mạng văn hóa"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q41",
+      "question": "Hồ Chí Minh cho rằng quá độ lên chủ nghĩa xã hội ở Việt Nam phải tiến hành như thế nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Từ từ, từng bước một"
+        },
+        {
+          "id": "B",
+          "text": "Nhanh chóng, chính xác"
+        },
+        {
+          "id": "C",
+          "text": "Cẩn thận, không chủ quan"
+        },
+        {
+          "id": "D",
+          "text": "Nhanh chóng, không chủ quan"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q42",
+      "question": "Chế độ xã hội dưới sự lãnh đạo của Đảng Cộng sản và giai cấp công nhân, đánh đổ đế quốc và phong kiến; trên nền tảng công nông liên minh, nhân dân lao động làm chủ, nhân dân dân chủ chuyên chính theo tư tường Mác - Lênin, theo Hồ Chí Minh đó là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chế độ dân chủ mới"
+        },
+        {
+          "id": "B",
+          "text": "Chế độ dân chủ nhân dân"
+        },
+        {
+          "id": "C",
+          "text": "Chế độ dân chủ xã hội chủ nghĩa"
+        },
+        {
+          "id": "D",
+          "text": "Chế độ chuyên chính vô sản"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q43",
+      "question": "Theo Hồ Chí Minh, phải kiên quyết khắc phục kịp thời các phản động lực trong con người và tổ chức. Đó là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Chủ nghĩa cá nhân"
+        },
+        {
+          "id": "B",
+          "text": "Chủ nghĩa vị kỷ"
+        },
+        {
+          "id": "C",
+          "text": "Phong cách tiểu tư sản"
+        },
+        {
+          "id": "D",
+          "text": "Phong cách tư sản"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q44",
+      "question": "Trong xã hội hiện nay, vận dụng tư tưởng Hồ Chí Minh về đạo đức cán bộ có còn phù hợp không?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Có. Vì tư tưởng của Người vẫn mang tính thời sự"
+        },
+        {
+          "id": "B",
+          "text": "Không. Vì tư tưởng của Người đã không còn phù hợp"
+        },
+        {
+          "id": "C",
+          "text": "Có. Vì tư tưởng của Người luôn mang tính thời sự vì vậy phải áp dụng phù hợp với từng giai đoạn của đất nước"
+        },
+        {
+          "id": "D",
+          "text": "Không. Vì cán bộ hiện nay đều đã được rèn luyện đạo đức cách mạng trước khi thực hiện nhiệm vụ, đặc biệt là thấm nhuần chủ nghĩa Mác - Lenin"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q45",
+      "question": "Hồ Chí Minh cho rằng:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Văn hoa vừa là mục tiêu, vừa là động lực của cách mạng => chăm lo đời sống vật chất và tinh thần của nhân dân"
+        },
+        {
+          "id": "B",
+          "text": "Văn hoa vừa là cơ sở, vừa là động lực của cách mạng => chăm lo đời sống vật chất và tinh thần của nhân dân"
+        },
+        {
+          "id": "C",
+          "text": "Văn hoa vừa là mục tiêu, vừa là nhân tố quyết định của cách mạng => chăm lo đời sống vật chất và tinh thần của nhân dân"
+        }
+      ],
+      "correctAnswer": "A",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q46",
+      "question": "Hồ Chí Minh dạy học ở trường Dục Thanh - Phan Thiết trong khoảng thời gian nào?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Năm 1909-1910"
+        },
+        {
+          "id": "B",
+          "text": "Năm 1909 - 1911"
+        },
+        {
+          "id": "C",
+          "text": "Năm 1908 - 1909"
+        },
+        {
+          "id": "D",
+          "text": "Năm 1910 - 1911"
+        }
+      ],
+      "correctAnswer": "D",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q47",
+      "question": "Theo Hồ Chí Minh, xây dựng khối đại đoàn kết toàn dân để tập hợp lực lượng, không được phép bỏ sót một lực lượng nào miễn không là Việt gian, không phản bội lại quyền lợi của dân chúng phải:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Đứng vững trên lập trường nhân dân lao động, giải quyết hài hòa mối quan hệ giai cấp - dân tộc"
+        },
+        {
+          "id": "B",
+          "text": "Đứng vững trên lập trường giai cấp nông dân, giải quyết hài hòa mối quan hệ giai cấp - dân tộc"
+        },
+        {
+          "id": "C",
+          "text": "Đứng vững trên lập trường giai cấp công nhân, giải quyết hài hòa mối quan hệ giai cấp - dân tộc"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q48",
+      "question": "Theo Hồ Chí Minh, ưu điểm lớn nhất của chủ nghĩa Tam dân của Tôn Trung Sơn là gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tự do, cơm áo, hòa bình"
+        },
+        {
+          "id": "B",
+          "text": "Phù hợp với điều kiện thực tế nước ta"
+        },
+        {
+          "id": "C",
+          "text": "Đấu tranh vì tự do, dân chủ"
+        },
+        {
+          "id": "D",
+          "text": "Chống phong kiến"
+        }
+      ],
+      "correctAnswer": "B",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q49",
+      "question": "Đâu không phải là nguyên tắc xây dựng chủ nghĩa xã hội trong thời kỳ quá độ theo tư tưởng Hồ Chí Minh?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Phải giữ vững được độc lập dân tộc"
+        },
+        {
+          "id": "B",
+          "text": "Phải đoàn kết, học tập kinh nghiệm từ thực tiễn"
+        },
+        {
+          "id": "C",
+          "text": "Mọi tư tưởng hành động phải tuân thủ tuyệt đối theo chủ nghĩa Mác - Lênin"
+        },
+        {
+          "id": "D",
+          "text": "Xây đi đôi với chống"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    },
+    {
+      "id": "hcm201_q50",
+      "question": "Nguyên tắc cơ bản trong nghiên cứu tư tưởng Hồ Chí Minh là:",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tất cả các phương án trên"
+        },
+        {
+          "id": "B",
+          "text": "Thống nhất giữa tính đảng và tính thực tiễn"
+        },
+        {
+          "id": "C",
+          "text": "Thống nhất giữa lí luận và thực tiễn"
+        },
+        {
+          "id": "D",
+          "text": "Thống nhất giữa tính khoa học và lý luận"
+        }
+      ],
+      "correctAnswer": "C",
+      "type": "single-choice",
+      "category": "HCM201",
+      "difficulty": "medium"
+    }
+  ],
+  "totalQuestions": 50
+}
