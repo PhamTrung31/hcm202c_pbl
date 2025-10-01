@@ -13,7 +13,6 @@ import {
 import "leaflet/dist/leaflet.css";
 import "leaflet-polylinedecorator"; // Import plugin
 
-// --- Định nghĩa Types ---
 export type ContentSection = {
   id: string;
   title?: string;
@@ -43,7 +42,6 @@ export interface MapViewProps {
   showChinaCityLabels: boolean;
 }
 
-// ... các hàm helper và icon không đổi ...
 const createCircleIcon = (size: number) => {
   const style = `background-color: #06b6d4; width: ${size}px; height: ${size}px; border-radius: 50%; border: 1px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.5);`;
   return L.divIcon({
@@ -64,7 +62,6 @@ function getCurvePoints(
   const numberOfSegments = 50;
 
   if (!controlPoints || controlPoints.length === 0) {
-    // Mặc định: cong đơn giản
     const offsetX = (end[1] - start[1]) * 0.1;
     const offsetY = (end[0] - start[0]) * 0.1;
     const control: [number, number] = [
@@ -84,7 +81,6 @@ function getCurvePoints(
       points.push([lat, lng]);
     }
   } else if (controlPoints.length === 1) {
-    // Cong với 1 điểm điều khiển (Bézier bậc hai)
     const control = controlPoints[0];
     for (let i = 0; i <= numberOfSegments; i++) {
       const t = i / numberOfSegments;
@@ -99,7 +95,6 @@ function getCurvePoints(
       points.push([lat, lng]);
     }
   } else if (controlPoints.length === 2) {
-    // Cong với 2 điểm điều khiển (Bézier bậc ba - S-curve)
     const control1 = controlPoints[0];
     const control2 = controlPoints[1];
     for (let i = 0; i <= numberOfSegments; i++) {
@@ -152,9 +147,6 @@ function MapEvents({ setZoomLevel }: { setZoomLevel: (zoom: number) => void }) {
 }
 const cityLabelStyles = `.city-label { background-color: transparent; border: none; box-shadow: none; color: #333; font-weight: bold; font-size: 12px; text-shadow: 1px 1px 2px white; }`;
 
-// --- THAY ĐỔI BẮT ĐẦU TẠI ĐÂY ---
-
-// 1. Component mới để vẽ mũi tên
 const PolylineDecorator = ({
   positions,
   pattern,
@@ -168,19 +160,16 @@ const PolylineDecorator = ({
   useEffect(() => {
     if (!map) return;
 
-    // Xóa decorator cũ nếu có
     if (decoratorRef.current) {
       map.removeLayer(decoratorRef.current);
     }
 
-    // Tạo decorator mới
     const decorator = L.polylineDecorator(positions, {
       patterns: [pattern],
     });
     decorator.addTo(map);
     decoratorRef.current = decorator;
 
-    // Hàm cleanup
     return () => {
       if (decoratorRef.current) {
         map.removeLayer(decoratorRef.current);
@@ -191,22 +180,20 @@ const PolylineDecorator = ({
   return null;
 };
 
-// 2. Định nghĩa kiểu dáng cho mũi tên
 const arrowPattern = {
-  offset: "50%", // Đặt mũi tên ở giữa đường
-  repeat: 0, // Chỉ lặp 1 lần (1 mũi tên mỗi đoạn)
+  offset: "50%",
+  repeat: 0,
   symbol: L.Symbol.arrowHead({
-    pixelSize: 8, // Kích thước mũi tên
+    pixelSize: 8,
     polygon: false,
     pathOptions: {
       stroke: true,
       weight: 2,
-      color: "#d9534f", // Cùng màu với đường
+      color: "#d9534f",
     },
   }),
 };
 
-// --- Component MapView chính ---
 export function MapView({
   points,
   journeyPath,
@@ -295,7 +282,6 @@ export function MapView({
                 positions={positions}
                 pathOptions={{ color: "#d9534f", weight: 2, dashArray: "5, 5" }}
               />
-              {/* 3. Sử dụng component PolylineDecorator để vẽ mũi tên */}
               <PolylineDecorator positions={positions} pattern={arrowPattern} />
             </React.Fragment>
           );
@@ -305,8 +291,8 @@ export function MapView({
         <MapEvents setZoomLevel={setZoomLevel} />
       </MapContainer>
       <div className="absolute left-4 bottom-6 z-[1000] rounded-full bg-white/90 px-4 py-2 text-sm text-slate-900 shadow font-bold">
-        Các điểm chỉ là tương đối và đại diện cho các sự kiện tiêu biểu. Có
-        những nơi Bác đi qua không xuất hiện trên bản đồ!
+        Vị trí các marker chỉ là tương đối và đại diện cho các sự kiện tiêu
+        biểu. Có những nơi Bác đi qua không xuất hiện trên bản đồ!
       </div>
     </div>
   );

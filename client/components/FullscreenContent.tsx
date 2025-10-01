@@ -16,7 +16,9 @@ export default function FullscreenContent({ point, onExit }: Props) {
     document.body.style.overflow = "hidden";
 
     // disable interactions on the underlying map container so it cannot cover or receive events
-    const mapEl = document.querySelector<HTMLElement>('[aria-label="Bản đồ thế giới"]');
+    const mapEl = document.querySelector<HTMLElement>(
+      '[aria-label="Bản đồ thế giới"]',
+    );
     const prevPointer = mapEl?.style.pointerEvents;
     const prevZ = mapEl?.style.zIndex;
     if (mapEl) {
@@ -37,7 +39,9 @@ export default function FullscreenContent({ point, onExit }: Props) {
   useEffect(() => {
     const root = scrollerRef.current;
     if (!root) return;
-    const sections = Array.from(root.querySelectorAll<HTMLElement>("[data-slide]"));
+    const sections = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-slide]"),
+    );
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -59,7 +63,9 @@ export default function FullscreenContent({ point, onExit }: Props) {
       e.preventDefault();
       if (isThrottled) return;
       const delta = e.deltaY;
-      const currentIndex = sections.findIndex((sec) => sec.dataset.visible === "true");
+      const currentIndex = sections.findIndex(
+        (sec) => sec.dataset.visible === "true",
+      );
       let target = currentIndex;
       if (delta > 0) target = Math.min(sections.length - 1, currentIndex + 1);
       else if (delta < 0) target = Math.max(0, currentIndex - 1);
@@ -80,7 +86,11 @@ export default function FullscreenContent({ point, onExit }: Props) {
     <div className="fixed inset-0 z-[99999] flex flex-col text-white">
       {/* Top-left exit always visible */}
       <div className="absolute left-4 top-4 z-[100000]">
-        <Button onClick={onExit} variant="secondary" className="bg-black/40 text-white backdrop-blur border-white/10">
+        <Button
+          onClick={onExit}
+          variant="secondary"
+          className="bg-black/40 text-white backdrop-blur border-white/10"
+        >
           Thoát
         </Button>
       </div>
@@ -99,39 +109,42 @@ export default function FullscreenContent({ point, onExit }: Props) {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60 transition-opacity duration-700" />
           <div className="relative z-10 mx-auto w-full max-w-4xl px-6 pb-24 pt-24">
-            <h1 className="text-4xl font-semibold drop-shadow-lg">{point.name}</h1>
-            {point.summary ? <p className="mt-3 max-w-2xl text-white/85">{point.summary}</p> : null}
+            <h1 className="text-4xl font-semibold drop-shadow-lg">
+              {point.name}
+            </h1>
+            {point.summary ? (
+              <p className="mt-3 max-w-2xl text-white/85">{point.summary}</p>
+            ) : null}
           </div>
         </section>
 
         {point.sections.map((s) => (
-          <section key={s.id} data-slide data-visible="false" className="snap-start relative h-screen w-full">
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-0 scale-105 transition-all duration-700"
-              style={{ backgroundImage: `url(${s.imageUrl || ""})` }}
+          <section
+            key={s.id}
+            data-slide
+            data-visible="false"
+            className="snap-start relative h-screen w-full flex items-center justify-center p-4 bg-black" // Thêm p-4, bg-black
+          >
+            <img
+              src={s.imageUrl || ""}
+              alt={s.title || point.name}
+              className="block max-h-full max-w-full object-contain transition-all duration-700 ease-out"
             />
-            <div className="absolute inset-0 bg-black/35 opacity-0 transition-opacity duration-700" />
-
-            <div className="relative z-10 mx-auto flex h-full max-w-4xl items-center px-6">
-              <div
-                className={cn(
-                  "transform transition-all duration-700 ease-out opacity-0 translate-y-6",
-                )}
-                // Visual state toggled by data-visible attribute via CSS below
-              >
-                {s.title ? <h2 className="text-3xl font-semibold text-white drop-shadow">{s.title}</h2> : null}
-                {s.body ? <p className="mt-4 max-w-3xl text-white/90 leading-relaxed">{s.body}</p> : null}
-              </div>
-            </div>
           </section>
         ))}
 
         {/* End: show CTA with exit */}
-        <section data-slide data-visible="false" className="snap-start relative h-screen w-full flex items-center justify-center">
+        <section
+          data-slide
+          data-visible="false"
+          className="snap-start relative h-screen w-full flex items-center justify-center"
+        >
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70 transition-opacity duration-700" />
           <div className="relative z-10 mx-auto max-w-2xl px-6 text-center">
             <h3 className="text-2xl font-semibold">Đã xem hết nội dung</h3>
-            <p className="mt-2 text-white/80">Quay lại bản đồ để chọn điểm khác.</p>
+            <p className="mt-2 text-white/80">
+              Quay lại bản đồ để chọn điểm khác.
+            </p>
             <div className="mt-6">
               <Button onClick={onExit} className="bg-cyan-400 text-slate-900">
                 Quay về bản đồ
