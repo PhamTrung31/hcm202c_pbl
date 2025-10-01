@@ -1,231 +1,313 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { cn } from "@/lib/utils";
+import L, { LatLngExpression } from "leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polyline,
+  Tooltip,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import "leaflet-polylinedecorator"; // Import plugin
 
+// --- Định nghĩa Types ---
 export type ContentSection = {
   id: string;
   title?: string;
   body?: string;
   imageUrl?: string;
 };
-
 export type MapPoint = {
   id: string;
   name: string;
-  latitude: number; // in degrees
-  longitude: number; // in degrees
+  latitude: number;
+  longitude: number;
   summary?: string;
   sections: ContentSection[];
+  small?: boolean;
 };
-
+export type JourneyLeg = {
+  startId: string;
+  endId: string;
+  lineType?: "straight";
+  controlPoints?: [number, number][];
+};
 export interface MapViewProps {
   points: MapPoint[];
+  journeyPath: JourneyLeg[];
   onSelect: (point: MapPoint) => void;
   className?: string;
+  showChinaCityLabels: boolean;
 }
 
-// We rely on Leaflet loaded via CDN in index.html (L global)
-declare const L: any;
+// ... các hàm helper và icon không đổi ...
+const createCircleIcon = (size: number) => {
+  const style = `background-color: #06b6d4; width: ${size}px; height: ${size}px; border-radius: 50%; border: 1px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.5);`;
+  return L.divIcon({
+    html: `<div style="${style}"></div>`,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    className: "",
+  });
+};
+const mainIcon = createCircleIcon(12);
+const smallIcon = createCircleIcon(8);
+function getCurvePoints(
+  start: [number, number],
+  end: [number, number],
+  controlPoints?: [number, number][],
+): LatLngExpression[] {
+  const points: LatLngExpression[] = [];
+  const numberOfSegments = 50;
 
-function createSquarePolygon(lat: number, lon: number, delta = 0.4) {
-  return [
-    [lat - delta, lon - delta],
-    [lat - delta, lon + delta],
-    [lat + delta, lon + delta],
-    [lat + delta, lon - delta],
-    [lat - delta, lon - delta],
-  ];
+  if (!controlPoints || controlPoints.length === 0) {
+    // Mặc định: cong đơn giản
+    const offsetX = (end[1] - start[1]) * 0.1;
+    const offsetY = (end[0] - start[0]) * 0.1;
+    const control: [number, number] = [
+      (start[0] + end[0]) / 2 - offsetY,
+      (start[1] + end[1]) / 2 + offsetX,
+    ];
+    for (let i = 0; i <= numberOfSegments; i++) {
+      const t = i / numberOfSegments;
+      const lat =
+        Math.pow(1 - t, 2) * start[0] +
+        2 * (1 - t) * t * control[0] +
+        Math.pow(t, 2) * end[0];
+      const lng =
+        Math.pow(1 - t, 2) * start[1] +
+        2 * (1 - t) * t * control[1] +
+        Math.pow(t, 2) * end[1];
+      points.push([lat, lng]);
+    }
+  } else if (controlPoints.length === 1) {
+    // Cong với 1 điểm điều khiển (Bézier bậc hai)
+    const control = controlPoints[0];
+    for (let i = 0; i <= numberOfSegments; i++) {
+      const t = i / numberOfSegments;
+      const lat =
+        Math.pow(1 - t, 2) * start[0] +
+        2 * (1 - t) * t * control[0] +
+        Math.pow(t, 2) * end[0];
+      const lng =
+        Math.pow(1 - t, 2) * start[1] +
+        2 * (1 - t) * t * control[1] +
+        Math.pow(t, 2) * end[1];
+      points.push([lat, lng]);
+    }
+  } else if (controlPoints.length === 2) {
+    // Cong với 2 điểm điều khiển (Bézier bậc ba - S-curve)
+    const control1 = controlPoints[0];
+    const control2 = controlPoints[1];
+    for (let i = 0; i <= numberOfSegments; i++) {
+      const t = i / numberOfSegments;
+      const lat =
+        Math.pow(1 - t, 3) * start[0] +
+        3 * Math.pow(1 - t, 2) * t * control1[0] +
+        3 * (1 - t) * Math.pow(t, 2) * control2[0] +
+        Math.pow(t, 3) * end[0];
+      const lng =
+        Math.pow(1 - t, 3) * start[1] +
+        3 * Math.pow(1 - t, 2) * t * control1[1] +
+        3 * (1 - t) * Math.pow(t, 2) * control2[1] +
+        Math.pow(t, 3) * end[1];
+      points.push([lat, lng]);
+    }
+  }
+  return points;
 }
-
-// A very rough polygon approximating Vietnam mainland. This is simplified and not geographically exact,
-// but sufficient to render a recognizable filled shape on the map. Coordinates are [lat, lon].
-const VIETNAM_POLYGON = [
-  [23.4, 102.0],
-  [21.5, 104.0],
-  [20.0, 105.5],
-  [18.0, 106.5],
-  [16.0, 107.5],
-  [14.0, 108.5],
-  [12.0, 109.0],
-  [11.0, 109.5],
-  [10.0, 109.0],
-  [9.0, 108.0],
-  [8.0, 106.5],
-  [10.0, 105.0],
-  [11.5, 104.0],
-  [12.5, 104.0],
-  [13.5, 104.5],
-  [14.5, 105.0],
-  [16.0, 104.0],
-  [18.5, 103.5],
-  [20.0, 104.0],
-  [22.0, 104.5],
-  [23.4, 102.0],
-];
-
-export function MapView({ points, onSelect, className }: MapViewProps) {
+function MapSizer() {
+  const map = useMap();
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const leafletRef = useRef<any>(null);
-
-  // Keep a stable ref to onSelect to avoid reinitializing the map each time parent re-renders
-  const onSelectRef = useRef(onSelect);
-  useEffect(() => {
-    onSelectRef.current = onSelect;
-  }, [onSelect]);
 
   useEffect(() => {
-    let cancelled = false;
-    async function ensureLoadAndInit() {
-      if (!mapRef.current) return;
-
-      // Dynamically load Leaflet via a single UMD script tag. If it's already being loaded, wait for it.
-      let L: any = (window as any).L;
-      if (typeof L === "undefined") {
-        const src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-        let existing = document.querySelector<HTMLScriptElement>(
-          `script[src="${src}"]`,
-        );
-        if (existing) {
-          // if script exists but L not yet ready, wait for load
-          await new Promise<void>((resolve, reject) => {
-            if ((window as any).L) return resolve();
-            const onLoad = () => resolve();
-            existing!.addEventListener("load", onLoad);
-            existing!.addEventListener("error", () =>
-              reject(new Error("Failed to load Leaflet")),
-            );
-            // safety timeout
-            setTimeout(() => {
-              if ((window as any).L) resolve();
-            }, 3000);
-          });
-          L = (window as any).L;
-        } else {
-          try {
-            await new Promise<void>((resolve, reject) => {
-              const s = document.createElement("script");
-              s.src = src;
-              s.async = true;
-              s.onload = () => resolve();
-              s.onerror = () => reject(new Error("Failed to load Leaflet"));
-              document.head.appendChild(s);
-            });
-            L = (window as any).L;
-          } catch (e) {
-            if (mapRef.current)
-              mapRef.current.innerHTML =
-                "<div class='p-6 text-center text-sm'>Không tải được Leaflet. Vui lòng ki��m tra kết nối.</div>";
-            return;
-          }
-        }
+    const baseTileSize = 256; // OSM default tile size
+    const minZ = 3.5;
+    const maxZ = 6;
+    const keepCenter = () => map.getCenter();
+    const fitWorldWidth = () => {
+      const width = map.getSize().x || (mapRef.current?.clientWidth ?? 1024);
+      let targetZ = Math.ceil(Math.log2(width / baseTileSize));
+      targetZ = Math.max(minZ, Math.min(maxZ, targetZ));
+      const center = keepCenter();
+      if (map.getZoom() !== targetZ) {
+        map.setView(center, targetZ, { animate: false });
       }
+    };
+    fitWorldWidth();
+    map.on("resize", fitWorldWidth);
+  }, [map]);
+  return null;
+}
+function MapEvents({ setZoomLevel }: { setZoomLevel: (zoom: number) => void }) {
+  const map = useMapEvents({
+    zoomend: () => {
+      setZoomLevel(map.getZoom());
+    },
+  });
+  return null;
+}
+const cityLabelStyles = `.city-label { background-color: transparent; border: none; box-shadow: none; color: #333; font-weight: bold; font-size: 12px; text-shadow: 1px 1px 2px white; }`;
 
-      if (cancelled) return;
+// --- THAY ĐỔI BẮT ĐẦU TẠI ĐÂY ---
 
-      // Initialize map centered on the world (small zoom) but keep interactions locked
-      const map = L.map(mapRef.current, {
-        center: [20, 0],
-        zoom: 2,
-        minZoom: 2,
-        maxZoom: 6,
-        zoomControl: false,
-        attributionControl: false,
-        dragging: false,
-        scrollWheelZoom: false,
-        doubleClickZoom: false,
-        boxZoom: false,
-        keyboard: false,
-        touchZoom: false,
-        tap: true,
-        inertia: false,
-      });
+// 1. Component mới để vẽ mũi tên
+const PolylineDecorator = ({
+  positions,
+  pattern,
+}: {
+  positions: LatLngExpression[];
+  pattern: any;
+}) => {
+  const map = useMap();
+  const decoratorRef = useRef<L.PolylineDecorator | null>(null);
 
-      // Ensure the container allows pointer events and touch actions
-      try {
-        mapRef.current!.style.touchAction = "manipulation";
-        mapRef.current!.style.pointerEvents = "auto";
-      } catch (e) {}
+  useEffect(() => {
+    if (!map) return;
 
-      // Add OpenStreetMap tiles without horizontal wrapping to avoid repeated worlds
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        noWrap: true,
-      }).addTo(map);
-
-      // Ensure the world spans the full viewport width to avoid side gutters
-      const baseTileSize = 256; // OSM default tile size
-      const minZ = 2;
-      const maxZ = 6;
-      const keepCenter = () => map.getCenter();
-      const fitWorldWidth = () => {
-        const width = map.getSize().x || (mapRef.current?.clientWidth ?? 1024);
-        let targetZ = Math.ceil(Math.log2(width / baseTileSize));
-        targetZ = Math.max(minZ, Math.min(maxZ, targetZ));
-        const center = keepCenter();
-        if (map.getZoom() !== targetZ) {
-          map.setView(center, targetZ, { animate: false });
-        }
-      };
-      fitWorldWidth();
-      map.on("resize", fitWorldWidth);
-
-      // We will not draw a Vietnam polygon overlay as requested; keep the map tiles clean.
-      // Render every provided point as an interactive marker (including islands).
-      points.forEach((p: MapPoint) => {
-        const isIsland =
-          p.id === "hoangsa" || p.id === "truongsa" || p.id === "phuquoc";
-        const marker = L.circleMarker([p.latitude, p.longitude], {
-          radius: isIsland ? 6 : 8,
-          color: "#06b6d4",
-          weight: 1,
-          fillColor: "#06b6d4",
-          fillOpacity: 1,
-          interactive: true,
-        }).addTo(map);
-        marker.on("click", (e: any) => {
-          e.originalEvent &&
-            e.originalEvent.stopPropagation &&
-            e.originalEvent.stopPropagation();
-          onSelectRef.current(p);
-        });
-      });
-
-      // Save reference for cleanup
-      leafletRef.current = map;
-
-      // Ensure map paint/size is correct after initial render
-      setTimeout(() => {
-        try {
-          map.invalidateSize();
-        } catch (e) {
-          // ignore
-        }
-      }, 100);
+    // Xóa decorator cũ nếu có
+    if (decoratorRef.current) {
+      map.removeLayer(decoratorRef.current);
     }
 
-    ensureLoadAndInit();
+    // Tạo decorator mới
+    const decorator = L.polylineDecorator(positions, {
+      patterns: [pattern],
+    });
+    decorator.addTo(map);
+    decoratorRef.current = decorator;
 
+    // Hàm cleanup
     return () => {
-      cancelled = true;
-      try {
-        leafletRef.current?.remove();
-      } catch (e) {}
-      leafletRef.current = null;
+      if (decoratorRef.current) {
+        map.removeLayer(decoratorRef.current);
+      }
     };
-  }, [points]);
+  }, [map, positions, pattern]);
+
+  return null;
+};
+
+// 2. Định nghĩa kiểu dáng cho mũi tên
+const arrowPattern = {
+  offset: "50%", // Đặt mũi tên ở giữa đường
+  repeat: 0, // Chỉ lặp 1 lần (1 mũi tên mỗi đoạn)
+  symbol: L.Symbol.arrowHead({
+    pixelSize: 8, // Kích thước mũi tên
+    polygon: false,
+    pathOptions: {
+      stroke: true,
+      weight: 2,
+      color: "#d9534f", // Cùng màu với đường
+    },
+  }),
+};
+
+// --- Component MapView chính ---
+export function MapView({
+  points,
+  journeyPath,
+  onSelect,
+  className,
+  showChinaCityLabels,
+}: MapViewProps) {
+  const [zoomLevel, setZoomLevel] = useState(2);
+  const pointsById = useMemo(
+    () => new Map(points.map((p) => [p.id, p])),
+    [points],
+  );
 
   return (
     <div
       className={cn("fixed inset-0 w-full h-full z-0", className)}
       aria-label="Bản đồ thế giới"
     >
-      <div ref={mapRef} className="absolute inset-0 h-full w-full" />
-      <div className="absolute left-4 bottom-6 z-[1000] rounded-full bg-white/90 px-4 py-2 text-sm text-slate-900 shadow">
-        Nhấn vào vùng tô để mở nội dung; bản đồ tĩnh (không zoom/pan)
+      <style>{cityLabelStyles}</style>
+      <MapContainer
+        className="h-full w-full"
+        center={[30, 40]}
+        zoom={2}
+        minZoom={3}
+        maxZoom={6}
+        zoomControl={true}
+        dragging={true}
+        scrollWheelZoom={true}
+        doubleClickZoom={true}
+        touchZoom={true}
+      >
+        <TileLayer
+          url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+          noWrap={true}
+        />
+
+        {points.map((point) => (
+          <Marker
+            key={point.id}
+            position={[point.latitude, point.longitude]}
+            icon={point.small ? smallIcon : mainIcon}
+            eventHandlers={{ click: () => onSelect(point) }}
+          >
+            {showChinaCityLabels &&
+              point.id.startsWith("China-") &&
+              zoomLevel <= 3 && (
+                <Tooltip
+                  permanent
+                  direction="top"
+                  offset={[0, -8]}
+                  className="city-label"
+                >
+                  {point.name.split(" - ")[0]}
+                </Tooltip>
+              )}
+          </Marker>
+        ))}
+
+        {journeyPath.map((leg) => {
+          const startPoint = pointsById.get(leg.startId);
+          const endPoint = pointsById.get(leg.endId);
+          if (!startPoint || !endPoint) return null;
+          const startLatLng: [number, number] = [
+            startPoint.latitude,
+            startPoint.longitude,
+          ];
+          const endLatLng: [number, number] = [
+            endPoint.latitude,
+            endPoint.longitude,
+          ];
+          let positions: LatLngExpression[];
+          if (leg.lineType === "straight") {
+            positions = [startLatLng, endLatLng];
+          } else {
+            positions = getCurvePoints(
+              startLatLng,
+              endLatLng,
+              leg.controlPoints,
+            );
+          }
+
+          return (
+            <React.Fragment key={`${leg.startId}-${endPoint.id}`}>
+              <Polyline
+                positions={positions}
+                pathOptions={{ color: "#d9534f", weight: 2, dashArray: "5, 5" }}
+              />
+              {/* 3. Sử dụng component PolylineDecorator để vẽ mũi tên */}
+              <PolylineDecorator positions={positions} pattern={arrowPattern} />
+            </React.Fragment>
+          );
+        })}
+
+        <MapSizer />
+        <MapEvents setZoomLevel={setZoomLevel} />
+      </MapContainer>
+      <div className="absolute left-4 bottom-6 z-[1000] rounded-full bg-white/90 px-4 py-2 text-sm text-slate-900 shadow font-bold">
+        Các điểm chỉ là tương đối và đại diện cho các sự kiện tiêu biểu. Có
+        những nơi Bác đi qua không xuất hiện trên bản đồ!
       </div>
     </div>
   );
 }
-
-export default MapView;
