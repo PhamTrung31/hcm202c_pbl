@@ -11,7 +11,7 @@
     ]
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "npx vite build",
     "dev:server": "tsx src/index.ts",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build",
