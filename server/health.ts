@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { mongoService } from "../../Temp/api/database/mongodb";
+import { mongoService } from "./database/mongodb";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {

@@ -1,19 +1,12 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { handleDemo } from "../../Temp/api/routes/demo";
-import {
-  saveQuizResult,
-  getQuizResults,
-  getPlayerRank,
-} from "../../Temp/api/routes/quiz";
-import {
-  getQuizQuestions,
-  getQuizStats,
-} from "../../Temp/api/routes/quiz-questions";
-import { getHistorySummary } from "../../Temp/api/routes/history";
-import { getChatbotResponse } from "../../Temp/api/routes/chatbot";
-import { mongoService } from "../../Temp/api/database/mongodb";
+import { mongoService } from "./database/mongodb";
+import { handleDemo } from "./routes/demo";
+import { getQuizQuestions, getQuizStats } from "./routes/quiz-questions";
+import { getPlayerRank, getQuizResults, saveQuizResult } from "./routes/quiz";
+import { getHistorySummary } from "./routes/history";
+import { getChatbotResponse } from "./routes/chatbot";
 
 export function createServer() {
   const app = express();
