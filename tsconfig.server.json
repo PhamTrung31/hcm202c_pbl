@@ -13,9 +13,13 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@shared/*": ["./shared/*"]
-    }
-  },
-  "include": ["server/**/*", "shared/**/*"],
-  "exclude": ["node_modules", "client", "dist"]
+      "@/*": ["client/*"],
+      "@shared/*": ["shared/*"]
+    },
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": false,
+    "outDir": "dist",
+    "emitDeclarationOnly": false
+  }
 }
