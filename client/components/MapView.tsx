@@ -1,17 +1,21 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import { cn } from "@/lib/utils";
-import L, { LatLngExpression } from "leaflet";
+
+// Import đúng chuẩn để TS nhận
+import * as L from "leaflet";
+import type { LatLngExpression } from "leaflet";
+
 import {
   MapContainer,
   TileLayer,
   Marker,
   Polyline,
-  Tooltip,
   useMap,
   useMapEvents,
 } from "react-leaflet";
+
 import "leaflet/dist/leaflet.css";
-import "leaflet-polylinedecorator"; // Import plugin
+import "leaflet-polylinedecorator";
 
 export type ContentSection = {
   id: string;
@@ -19,6 +23,7 @@ export type ContentSection = {
   body?: string;
   imageUrl?: string;
 };
+
 export type MapPoint = {
   id: string;
   name: string;
@@ -28,12 +33,14 @@ export type MapPoint = {
   sections: ContentSection[];
   small?: boolean;
 };
+
 export type JourneyLeg = {
   startId: string;
   endId: string;
   lineType?: "straight";
   controlPoints?: [number, number][];
 };
+
 export interface MapViewProps {
   points: MapPoint[];
   journeyPath: JourneyLeg[];
@@ -50,8 +57,10 @@ const createCircleIcon = (size: number) => {
     className: "",
   });
 };
+
 const mainIcon = createCircleIcon(12);
 const smallIcon = createCircleIcon(8);
+
 function getCurvePoints(
   start: [number, number],
   end: [number, number],
@@ -113,12 +122,13 @@ function getCurvePoints(
   }
   return points;
 }
+
 function MapSizer() {
   const map = useMap();
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const baseTileSize = 256; // OSM default tile size
+    const baseTileSize = 256;
     const minZ = 3.5;
     const maxZ = 6;
     const keepCenter = () => map.getCenter();
@@ -136,14 +146,14 @@ function MapSizer() {
   }, [map]);
   return null;
 }
+
 function MapEvents({ setZoomLevel }: { setZoomLevel: (zoom: number) => void }) {
-  const map = useMapEvents({
-    zoomend: () => {
-      setZoomLevel(map.getZoom());
-    },
+  useMapEvents({
+    zoomend: (e) => setZoomLevel(e.target.getZoom()),
   });
   return null;
 }
+
 const cityLabelStyles = `.city-label { background-color: transparent; border: none; box-shadow: none; color: #333; font-weight: bold; font-size: 12px; text-shadow: 1px 1px 2px white; }`;
 
 const PolylineDecorator = ({
@@ -154,16 +164,14 @@ const PolylineDecorator = ({
   pattern: any;
 }) => {
   const map = useMap();
-  const decoratorRef = useRef<L.PolylineDecorator | null>(null);
+  const decoratorRef = useRef<L.Layer | null>(null);
 
   useEffect(() => {
     if (!map) return;
-
     if (decoratorRef.current) {
       map.removeLayer(decoratorRef.current);
     }
-
-    const decorator = L.polylineDecorator(positions, {
+    const decorator = (L as any).polylineDecorator(positions, {
       patterns: [pattern],
     });
     decorator.addTo(map);
@@ -182,7 +190,7 @@ const PolylineDecorator = ({
 const arrowPattern = {
   offset: "50%",
   repeat: 0,
-  symbol: L.Symbol.arrowHead({
+  symbol: (L as any).Symbol.arrowHead({
     pixelSize: 8,
     polygon: false,
     pathOptions: {
@@ -198,7 +206,6 @@ export function MapView({
   journeyPath,
   onSelect,
   className,
-  showChinaCityLabels,
 }: MapViewProps) {
   const [zoomLevel, setZoomLevel] = useState(2);
   const pointsById = useMemo(
@@ -214,48 +221,36 @@ export function MapView({
       <style>{cityLabelStyles}</style>
       <MapContainer
         className="h-full w-full"
-        center={[30, 40]}
+        center={[30, 40] as LatLngExpression}
         zoom={2}
         minZoom={3}
         maxZoom={6}
-        zoomControl={true}
-        dragging={true}
-        scrollWheelZoom={true}
-        doubleClickZoom={true}
-        touchZoom={true}
+        zoomControl
+        dragging
+        scrollWheelZoom
+        doubleClickZoom
+        touchZoom
       >
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png"
           attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-          noWrap={true}
+          noWrap
         />
 
         {points.map((point) => (
           <Marker
             key={point.id}
-            position={[point.latitude, point.longitude]}
+            position={[point.latitude, point.longitude] as LatLngExpression}
             icon={point.small ? smallIcon : mainIcon}
             eventHandlers={{ click: () => onSelect(point) }}
-          >
-            {showChinaCityLabels &&
-              point.id.startsWith("China-") &&
-              zoomLevel <= 3 && (
-                <Tooltip
-                  permanent
-                  direction="top"
-                  offset={[0, -8]}
-                  className="city-label"
-                >
-                  {point.name.split(" - ")[0]}
-                </Tooltip>
-              )}
-          </Marker>
+          />
         ))}
 
         {journeyPath.map((leg) => {
           const startPoint = pointsById.get(leg.startId);
           const endPoint = pointsById.get(leg.endId);
           if (!startPoint || !endPoint) return null;
+
           const startLatLng: [number, number] = [
             startPoint.latitude,
             startPoint.longitude,
@@ -264,16 +259,11 @@ export function MapView({
             endPoint.latitude,
             endPoint.longitude,
           ];
-          let positions: LatLngExpression[];
-          if (leg.lineType === "straight") {
-            positions = [startLatLng, endLatLng];
-          } else {
-            positions = getCurvePoints(
-              startLatLng,
-              endLatLng,
-              leg.controlPoints,
-            );
-          }
+
+          const positions: LatLngExpression[] =
+            leg.lineType === "straight"
+              ? [startLatLng, endLatLng]
+              : getCurvePoints(startLatLng, endLatLng, leg.controlPoints);
 
           return (
             <React.Fragment key={`${leg.startId}-${endPoint.id}`}>
