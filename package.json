@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "vite",
     "build:client": "npx vite build --config vite.config.ts",
     "build:server": "tsc",
     "build": "npm run build:client && npm run build:server",
@@ -11,10 +12,10 @@
   "dependencies": {
     "@jspc/react-leaflet-curve": "^3.0.0",
     "@types/mongodb": "^4.0.6",
-    "@vitejs/plugin-react-swc": "^4.0.0",
-    "dotenv": "^17.2.2",
     "vite": "^7.1.2",
+    "@vitejs/plugin-react-swc": "^4.0.0",
     "express": "^5.1.0",
+    "dotenv": "^17.2.2",
     "leaflet": "^1.9.4",
     "leaflet-curve": "^1.0.0",
     "leaflet-polylinedecorator": "^1.6.0",
