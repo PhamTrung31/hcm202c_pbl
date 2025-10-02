@@ -52,7 +52,7 @@ export function createServer() {
   });
 
   // 👉 Serve frontend React build
-  const frontendPath = path.join(__dirname, "../client/dist"); // nếu dùng Vite
+  const frontendPath = path.join(__dirname, "../client-dist");
   app.use(express.static(frontendPath));
 
   // Catch-all: cho React Router
