@@ -1,4 +1,4 @@
-import { MongoClient, Db, Collection } from "mongodb.js";
+import { MongoClient, Db, Collection } from "mongodb";
 import { QuizResult } from "@shared/api";
 
 class MongoDBService {
