@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ES2020",
     "lib": ["ES2020"],
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "dist",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -15,11 +15,8 @@
     "paths": {
       "@/*": ["client/*"],
       "@shared/*": ["shared/*"]
-    },
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "noEmit": false,
-    "outDir": "dist",
-    "emitDeclarationOnly": false
-  }
+    }
+  },
+  "include": ["server/**/*", "shared/**/*"],
+  "exclude": ["node_modules", "client", "dist"]
 }
