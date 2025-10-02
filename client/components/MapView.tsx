@@ -39,7 +39,6 @@ export interface MapViewProps {
   journeyPath: JourneyLeg[];
   onSelect: (point: MapPoint) => void;
   className?: string;
-  showChinaCityLabels: boolean;
 }
 
 const createCircleIcon = (size: number) => {
