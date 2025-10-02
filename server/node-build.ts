@@ -3,7 +3,7 @@ import { createServer } from "./index";
 import * as express from "express";
 
 const app = createServer();
-const port = process.env.PORT || 3000;
+const port = process.env.VERCEL_URL || 3000;
 
 // In production, serve the built SPA files
 const __dirname = import.meta.dirname;
@@ -24,8 +24,8 @@ app.get("*", (req, res) => {
 
 app.listen(port, () => {
   console.log(`🚀 Fusion Starter server running on port ${port}`);
-  console.log(`📱 Frontend: http://localhost:${port}`);
-  console.log(`🔧 API: http://localhost:${port}/api`);
+  console.log(`📱 Frontend: ${port}`);
+  console.log(`🔧 API: ${port}/api`);
 });
 
 // Graceful shutdown

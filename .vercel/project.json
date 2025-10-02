@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_lIB95aUjKI3FX3mwEjQK5Z5UA3jL",
+  "orgId": "team_SOvEjqjfjyvQDuDusXZ4TbtV",
+  "projectName": "hcm202c-pbl",
+  "settings": {
+    "createdAt": 1757925372905,
+    "framework": "vite",
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "22.x"
+  }
+}
