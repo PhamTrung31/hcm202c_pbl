@@ -2,14 +2,17 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import path from "path";
-import { mongoService } from "./database/mongodb";
+import { mongoService } from "./database/mongodb.js";
 
-// Import routes
-import { handleDemo } from "./routes/demo";
-import { getQuizQuestions, getQuizStats } from "./routes/quiz-questions";
-import { getPlayerRank, getQuizResults, saveQuizResult } from "./routes/quiz";
-import { getHistorySummary } from "./routes/history";
-import { getChatbotResponse } from "./routes/chatbot";
+import { handleDemo } from "./routes/demo.js";
+import { getQuizQuestions, getQuizStats } from "./routes/quiz-questions.js";
+import {
+  getPlayerRank,
+  getQuizResults,
+  saveQuizResult,
+} from "./routes/quiz.js";
+import { getHistorySummary } from "./routes/history.js";
+import { getChatbotResponse } from "./routes/chatbot.js";
 
 export function createServer() {
   const app = express();
