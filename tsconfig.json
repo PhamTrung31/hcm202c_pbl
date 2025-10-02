@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "outDir": "server-dist",
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "isolatedModules": true,
     "moduleDetection": "force",
     "jsx": "react-jsx",
