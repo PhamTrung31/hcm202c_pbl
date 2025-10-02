@@ -1,7 +1,10 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import path from "path";
 import { mongoService } from "./database/mongodb";
+
+// Import routes
 import { handleDemo } from "./routes/demo";
 import { getQuizQuestions, getQuizStats } from "./routes/quiz-questions";
 import { getPlayerRank, getQuizResults, saveQuizResult } from "./routes/quiz";
@@ -14,38 +17,32 @@ export function createServer() {
   // Middleware
   app.use(
     cors({
-      origin: true, // Allow all origins in production or specify your domain
+      origin: true, // bạn có thể set thành domain của frontend nếu muốn an toàn hơn
       credentials: true,
     }),
   );
   app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-  // Initialize MongoDB connection
+  // MongoDB
   mongoService.connect().catch(console.error);
 
-  // Example API routes
+  // API routes
   app.get("/api/ping", (_req, res) => {
-    const ping = process.env.PING_MESSAGE ?? "ping";
-    res.json({ message: ping });
+    res.json({ message: process.env.PING_MESSAGE ?? "ping" });
   });
 
   app.get("/api/demo", handleDemo);
 
-  // Quiz routes
   app.get("/api/quiz/questions", getQuizQuestions);
   app.get("/api/quiz/stats", getQuizStats);
   app.post("/api/quiz/save-result", saveQuizResult);
   app.post("/api/quiz/rank", getPlayerRank);
   app.get("/api/quiz/results", getQuizResults);
 
-  // History routes
   app.get("/api/history/summary", getHistorySummary);
-
-  // Chatbot routes
   app.post("/api/chatbot/message", getChatbotResponse);
 
-  // Health check
   app.get("/api/health", (_req, res) => {
     res.json({
       status: "ok",
@@ -54,10 +51,27 @@ export function createServer() {
     });
   });
 
+  // 👉 Serve frontend React build
+  const frontendPath = path.join(__dirname, "../client/dist"); // nếu dùng Vite
+  app.use(express.static(frontendPath));
+
+  // Catch-all: cho React Router
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
+
   return app;
 }
 
-// Export for Vercel serverless
+// Nếu chạy local: start server
+if (require.main === module) {
+  const app = createServer();
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () =>
+    console.log(`Server running on http://localhost:${PORT}`),
+  );
+}
+
 export default createServer();
 
 // import "dotenv/config";

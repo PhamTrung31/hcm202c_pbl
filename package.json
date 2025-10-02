@@ -12,13 +12,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:client && npm run build:server && npm run vercel:prepare",
-    "build:client": "vite build",
-    "build:server": "vite build --config vite.config.server.ts",
-    "vercel:prepare": "node scripts/prepare-vercel.js",
-    "start": "node dist/server/node-build.mjs",
-    "test": "vitest --run",
-    "format.fix": "prettier --write .",
+    "build": "npm run build:client && tsc",
+    "build:client": "cd client && npm install && npm run build",
+    "start": "node dist/index.js",
     "typecheck": "tsc"
   },
   "dependencies": {
