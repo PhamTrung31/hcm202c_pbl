@@ -25,6 +25,12 @@ export function createServer() {
     res.json({ message: ping });
   });
 
+  // Health check for hosting providers (Render, Heroku, etc.)
+  // Responds 200 so platform port scanners can verify the service is up.
+  app.get("/health", (_req, res) => {
+    res.sendStatus(200);
+  });
+
   app.get("/api/demo", handleDemo);
   
   // Quiz routes
