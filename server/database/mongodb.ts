@@ -13,7 +13,8 @@ class MongoDBService {
 
       const connectionString = process.env.MONGODB_CONNECTION_STRING;
       if (!connectionString) {
-        throw new Error('MONGODB_CONNECTION_STRING không được tìm thấy trong biến môi trường');
+        console.warn('⚠️ MONGODB_CONNECTION_STRING not found in environment — skipping MongoDB connection (read-only mode).');
+        return; // Do not throw in environments where DB is optional
       }
 
       this.client = new MongoClient(connectionString);
